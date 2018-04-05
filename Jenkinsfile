@@ -11,7 +11,8 @@ node('jenkins-agent-go-1') {
         echo 'Initializing + Checking Environment...'
 	    def root = tool name: 'Go 1.8', type: 'go'
 	    withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-        sh 'go version'
+            sh 'go version'
+        }
     }
 
     stage('Checkout SCM') {
@@ -31,7 +32,7 @@ node('jenkins-agent-go-1') {
 	
     }finally{
         
-        stage('SonarQube analysis') {
+    stage('SonarQube analysis') {
         
         def scannerHome = tool 'SonarQube Scanner';
         withSonarQubeEnv('SonarQube') {
